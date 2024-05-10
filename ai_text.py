@@ -23,14 +23,8 @@ def summarize(text, model="gpt-3.5-turbo", meeting=False):
         system_instruction = "Summarize content you are provided only into 3 lines of bulleted points"
 
     messages = [
-        {
-            "role": "system",
-            "content": system_instruction,
-        },
-        {
-            "role": "user",
-            "content": text,
-        },
+        {"role": "system", "content": system_instruction},
+        {"role": "user", "content": text},
     ]
 
     response = openai.chat.completions.create(
