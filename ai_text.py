@@ -1,12 +1,26 @@
+"""Functions related to Basic AI Text"""
+
 import openai
 import key         # file: OpenAI Client Key
 
-openai.api_key = key.OPENAI_API_KEY   # Use your key
+openai.api_key = key.OPENAI_API_KEY   # Use your own key
 ##############################################################################
 
-def summarize_3lines(text, model="gpt-3.5-turbo"):
-    """Summarize text into 3 lines of bullted points using gpt-3.5-turbo"""
-    system_instruction = "Summarize content you are provided only into 3 lines of bulleted points"
+def summarize(text, model="gpt-3.5-turbo", meeting=False):
+    """Summarize text into 3 lines of bullted points"""
+    """Summarize the meeting into 3 sections: 
+    overall, action items, and next meeting topics
+    """
+    if meeting:
+        system_instruction = """
+        You will be provided with meeting notes, and your task is to summarize the meeting as follows:
+        
+        -Overall summary of discussion
+        -Action items (what needs to be done and who is doing it)
+        -If applicable, a list of topics that need to be discussed more fully in the next meeting.
+    """
+    else:
+        system_instruction = "Summarize content you are provided only into 3 lines of bulleted points"
 
     messages = [
         {
@@ -30,19 +44,20 @@ def summarize_3lines(text, model="gpt-3.5-turbo"):
     return result
 ##############################################################################
 
-def translate(text, src_lang, trg_lang, model="gpt-3.5-turbo"):
-    """Translate text from source language into target language"""
-    system_instruction = f"You will be provided with a sentence in {src_lang}, and your task is to translate it into {trg_lang}."
+def translate(text, trg_lang, model="gpt-3.5-turbo", src_lang=''):
+    """Translate text from source language into target language.
+    Or it can detect the source language, 
+    so you can translate only with the target language.
+    """
+    if src_lang:
+        system_instruction = f"You will be provided with a sentence in {src_lang}, and your task is to translate it into {trg_lang}."
+    else:
+        system_instruction = "You will be provided the text, and your task is to detect the source language and translate it into a given target language."
+        system_instruction += f"\nTranslate this into {trg_lang}: {text}"
 
     messages = [
-        {
-            "role": "system",
-            "content": system_instruction
-        },
-        {
-            "role": "user",
-            "content": text
-        }
+        {"role": "system", "content": system_instruction},
+        {"role": "user", "content": text},
     ]
 
     response = openai.chat.completions.create(
@@ -58,7 +73,7 @@ def translate(text, src_lang, trg_lang, model="gpt-3.5-turbo"):
 ##############################################################################
 
 def chat(messages, model="gpt-3.5-turbo"):
-    """Chatbot generates response from user message"""
+    """Chatbot generates response from user message."""
     response = openai.chat.completions.create(
         model=model,
         messages=messages,

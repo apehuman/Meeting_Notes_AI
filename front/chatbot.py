@@ -28,7 +28,7 @@ if prompt := st.chat_input("Say something"):
             {"role": m["role"], "content": m["content"]}
             for m in st.session_state.messages
         ]
-        response = requests.post(chat_url, json=dict(messages=messages))
+        response = requests.post(chat_url, json=dict(messages = messages))
         st.markdown(response.json()["content"])
         # Add assistant response to chat history
         st.session_state.messages.append(response.json())

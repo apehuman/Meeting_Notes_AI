@@ -13,8 +13,17 @@ class InputText(BaseModel):
 
 @app.post("/summarize")
 def post_summarize(input_text: InputText):
-    summary = aitxt.summarize_3lines(input_text.text)
+    """Summarize text into 3 lines."""
+    summary = aitxt.summarize(input_text.text)
     return {"summary": summary}
+
+
+@app.post("/summarize-meeting")
+def post_summarize(input_text: InputText):
+    """Summarize the meeting into 3 sections: 
+    overall, action items, and next meeting topics"""
+    meeting_summary = aitxt.summarize(input_text.text, meeting=True)
+    return {"summary": meeting_summary}
 ##############################################################################
 
 class TextTranslation(BaseModel):
@@ -24,7 +33,15 @@ class TextTranslation(BaseModel):
 
 @app.post("/translate")
 def post_translate(translation: TextTranslation):
-    translation_text = aitxt.translate(translation.text, translation.src, translation.trg)
+    """Translate text from source language into target language.
+    Or it can detect source langauge from the given text 
+    to tranlate into target language.
+    """
+    if translation.src:
+        translation_text = aitxt.translate(translation.text, translation.trg, 
+                                          src_lang=translation.src)
+    else: 
+        translation_text = aitxt.translate(translation.text, translation.trg)
     return {"translation": translation_text}
 ##############################################################################
 
@@ -37,6 +54,7 @@ class Messages(BaseModel):
 
 @app.post("/chat", response_model=Turn)
 def post_chat(msgs: Messages):
+    """Chatbot generates response from user's message."""
     msgs = dict(msgs)
     assistant_turn = aitxt.chat(msgs['messages'])
     return assistant_turn
