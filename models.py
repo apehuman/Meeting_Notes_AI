@@ -21,6 +21,10 @@ class Note(Base):
     __tablename__ = "notes"
 
     id = Column(Integer, primary_key=True)
+    topic = Column(String, nullable=False)
     content = Column(Text, nullable=False)
     date_added = Column(DateTime, nullable=False, default=datetime.now())
     folder_id = Column(Integer, ForeignKey("folders.id"))
+
+    # TODO: audio_file = 
+    # TODO: attendee = 
