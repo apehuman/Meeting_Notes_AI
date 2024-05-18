@@ -2,6 +2,29 @@
 AI Meeting Notes
 
 ## Table of Contents
+* File/Directory Structure
+   ```
+    ├── main.py
+    ├── database.py  (SQLAlchemy DB connection - SQLite)
+    ├── models.py    (DB Modeling)
+    └── frontend
+    ```
+* DB
+   * Folder
+        | Columns | Description |
+        | ----------- | ----------- |
+        | :white_check_mark: name        | 폴더명       |
+        | :white_check_mark: date_added  | Timestamp   |
+    * Note
+        | Columns      | Description |
+        | -----------  | ----------- |
+        | :white_check_mark: topic        | 제목         |
+        | :white_check_mark: content      | 메모/회의 내용 |
+        | :white_check_mark: date_added   | Timestamp   |
+        | :white_check_mark: folder_id    | 속한 folder (foreign key) |
+        | audio_file   | 오디오 파일  |
+        | attendee     | 참석자      |
+
 * AI Text
     * 요약
         * 3줄 요약 
