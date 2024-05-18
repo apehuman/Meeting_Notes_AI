@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 3b3012d2e51f
+Revision ID: 55b383926c9d
 Revises: 
-Create Date: 2024-05-18 13:26:21.729481
+Create Date: 2024-05-18 17:55:08.546619
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '3b3012d2e51f'
+revision: str = '55b383926c9d'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -28,6 +28,7 @@ def upgrade() -> None:
     )
     op.create_table('notes',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('topic', sa.String(), nullable=False),
     sa.Column('content', sa.Text(), nullable=False),
     sa.Column('date_added', sa.DateTime(), nullable=False),
     sa.Column('folder_id', sa.Integer(), nullable=True),
