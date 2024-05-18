@@ -7,6 +7,10 @@ AI Meeting Notes
     ├── main.py
     ├── database.py  (SQLAlchemy DB connection - SQLite)
     ├── models.py    (DB Modeling)
+    ├── domain
+    │   ├── folder
+    │   ├── note
+    │   └── user
     └── frontend
     ```
 * DB
