@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 
 key.py
+
+README
+*.mako
