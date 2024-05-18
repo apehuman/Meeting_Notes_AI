@@ -1,0 +1,25 @@
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
+
+from database import Base
+
+
+# Create your models here
+class Folder(Base):
+    """A folder contains meeting notes"""
+    __tablename__ = "folders"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    date_added = Column(DateTime, nullable=False)
+
+    notes = relationship("Note", backref="folder", cascade='all, delete')  # 1:M relationship
+
+class Note(Base):
+    """Meeting Notes"""
+    __tablename__ = "notes"
+
+    id = Column(Integer, primary_key=True)
+    content = Column(Text, nullable=False)
+    date_added = Column(DateTime, nullable=False)
+    folder_id = Column(Integer, ForeignKey("folders.id"))
