@@ -25,6 +25,4 @@ class Note(Base):
     content = Column(Text, nullable=False)
     date_added = Column(DateTime, nullable=False, default=datetime.now())
     folder_id = Column(Integer, ForeignKey("folders.id"))
-
-    # TODO: audio_file = 
     # TODO: attendee = 
