@@ -10,7 +10,14 @@ router = APIRouter(
 )
 
 @router.get("/list", response_model=list[folder_schema.Folder])
-def folder_list(db: Session = Depends(get_db)):   # Dependency Injection
+def folders(db: Session = Depends(get_db)):   # Dependency Injection
     """Show all folders"""
-    _folder_list = folder_crud.get_folder_list(db)
-    return _folder_list
+    _folders = folder_crud.get_folders(db)
+    return _folders
+
+
+@router.get("/{folder_id}", response_model=folder_schema.Folder)
+def folder(folder_id: int, db: Session = Depends(get_db)):   # Dependency Injection
+    """Show a single folder and all its notes"""
+    _folder = folder_crud.get_folder(db, id=folder_id)
+    return _folder
