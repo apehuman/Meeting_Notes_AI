@@ -10,7 +10,9 @@ AI Meeting Notes
     ├── domain
     │   ├── folder
     │   ├── note
-    │   └── user
+    │   ├── user
+    │   ├── ai_text
+    │   └── ai_audio
     └── frontend
     ```
 * DB
@@ -26,17 +28,26 @@ AI Meeting Notes
         | :white_check_mark: content      | 메모/회의 내용 |
         | :white_check_mark: date_added   | Timestamp   |
         | :white_check_mark: folder_id    | 속한 folder (foreign key) |
-        | audio_file   | 오디오 파일  |
         | attendee     | 참석자      |
+        * Save & Load audio file
+    * User
+        | Columns | Description |
+        | ----------- | ----------- |
+        |  id       |  unique id (Primary key)       |
+        |  name       | 이름        |
+
 
 * AI Text
-    * 요약
-        * 3줄 요약 
-        * 회의록 요약
-    * 번역 (/translate)
-        * text: source langauge -> target language
-        * text (source language detection) -> target language
-    * Chatbot (/chat)
+    | Function |          | URL      |
+    | -------- | -------- | -------- | 
+    |   요약   |  3줄 요약  | /summarize | 
+    |         | 회의록 요약| /summarize-meeting| 
+    |   번역    |         | /translate |
+    | Chatbot |          | /chat     | 
+
+    * 번역
+        1.  text: source langauge -> target language
+        2. text (source language detection) -> target language
 
 ---
 
