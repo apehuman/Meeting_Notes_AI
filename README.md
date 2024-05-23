@@ -28,6 +28,7 @@ AI Meeting Notes
         | :white_check_mark: topic        | 제목         |
         | :white_check_mark: content      | 메모/회의 내용 |
         | :white_check_mark: date_added   | Timestamp   |
+        | :heavy_plus_sign: date_eidted   | Timestamp   |
         | :white_check_mark: folder_id    | 속한 folder (foreign key) |
         | attendee     | 참석자      |
         * Save & Load audio file

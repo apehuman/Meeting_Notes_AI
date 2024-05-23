@@ -27,7 +27,7 @@ for note in notes:
     if note['date_edited']:
         date_edited = datetime.strptime(note['date_edited'], "%Y-%m-%dT%H:%M:%S.%f")
         date_edited = date_edited.strftime("%Y-%m-%d %H:%M")
-        time += f" (last edited time: {date_edited})"
+        time += f" (last edited: {date_edited})"
 
     st.markdown(f"* {note['topic']} {time}")
 
