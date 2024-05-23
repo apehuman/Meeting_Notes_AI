@@ -24,5 +24,6 @@ class Note(Base):
     topic = Column(String, nullable=False)
     content = Column(Text, nullable=False)
     date_added = Column(DateTime, nullable=False, default=datetime.now())
+    date_edited = Column(DateTime, nullable=True)
     folder_id = Column(Integer, ForeignKey("folders.id"))
     # TODO: attendee = 

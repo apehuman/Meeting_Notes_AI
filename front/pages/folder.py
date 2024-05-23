@@ -19,7 +19,19 @@ st.header("Notes: ")
 
 st.page_link("pages/new_note_form.py", label="Add a new Note", icon="➕")
 
-for note in folder['notes']:
+notes = folder['notes']
+for note in notes:
     date_added = datetime.strptime(note['date_added'], "%Y-%m-%dT%H:%M:%S.%f")
-    st.markdown(f"* {note['topic']} ({date_added.strftime("%Y-%m-%d %H:%M")})")
+    date_added = date_added.strftime("%Y-%m-%d %H:%M")
+    time = f"({date_added})"
+    if note['date_edited']:
+        date_edited = datetime.strptime(note['date_edited'], "%Y-%m-%dT%H:%M:%S.%f")
+        date_edited = date_edited.strftime("%Y-%m-%d %H:%M")
+        time += f" (last edited time: {date_edited})"
+
+    st.markdown(f"* {note['topic']} {time}")
+
     st.markdown(f"&emsp;&emsp;{note['content']}")
+    if st.button("Edit this note", key=note['id']):
+        st.session_state.note_id = note['id']
+        st.switch_page("pages/edit_note_form.py")

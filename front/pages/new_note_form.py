@@ -1,5 +1,4 @@
 import streamlit as st
-import requests
 
 import api
 import template
@@ -16,6 +15,7 @@ st.page_link("pages/folder.py", label=folder['name'], icon="📂")
 
 
 form = st.form(key="Create Note")
+form.markdown("**Add a new Note**")
 topic = form.text_input("Add a new topic: ")
 content = form.text_area("Add a new content: ")
 submit = form.form_submit_button("Add Note")

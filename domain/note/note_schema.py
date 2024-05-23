@@ -8,6 +8,7 @@ class Note(BaseModel):
     topic: str
     content: str
     date_added: datetime.datetime
+    date_edited: datetime.datetime | None = None
 
 
 class NoteCreate(BaseModel):
@@ -19,3 +20,7 @@ class NoteCreate(BaseModel):
         if not v or not v.strip():
             raise ValueError('Invalid Input: Empty value')
         return v
+
+
+class NoteUpdate(NoteCreate):
+    id: int
