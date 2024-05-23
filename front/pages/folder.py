@@ -14,7 +14,7 @@ if 'folder_id' not in st.session_state:
 folder_url = f"http://127.0.0.1:8000/folder/{st.session_state.folder_id}"
 folder = requests.get(folder_url).json()
 
-st.title(f"Folder: {folder['name']}")
+st.title(f":open_file_folder: Folder: {folder['name']}")
 
 st.header("Notes: ")
 for note in folder['notes']:
