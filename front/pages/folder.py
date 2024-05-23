@@ -30,8 +30,8 @@ for note in notes:
         time += f" (last edited: {date_edited})"
 
     st.markdown(f"* {note['topic']} {time}")
-
     st.markdown(f"&emsp;&emsp;{note['content']}")
+    
     if st.button("Edit this note", key=note['id']):
         st.session_state.note_id = note['id']
         st.switch_page("pages/edit_note_form.py")
