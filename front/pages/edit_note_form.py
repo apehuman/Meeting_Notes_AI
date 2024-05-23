@@ -27,10 +27,13 @@ else:
     submit = form.form_submit_button("Save changes")
 
     if submit:
-        response = api.update_note(note['id'], topic, content)
-        if (response.status_code == 204):
-            st.success(f" '{topic}' note has been edited!")
-        elif (response.status_code == 422):
-            st.warning("You should fill the form.")
-        elif (response.status_code == 404):
-            st.error("There's no such note")
+        if (topic == note['topic'] and content == note['content']):
+            st.error("You didn't edited any words!")
+        else: 
+            response = api.update_note(note['id'], topic, content)
+            if (response.status_code == 204):
+                st.success(f" '{topic}' note has been edited!")
+            elif (response.status_code == 422):
+                st.warning("You should fill the form.")
+            elif (response.status_code == 404):
+                st.error("There's no such note")
