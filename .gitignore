@@ -3,6 +3,7 @@ __pycache__/
 
 key.py
 
+migrations/versions/
 README
 *.mako
 *.db

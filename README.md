@@ -13,7 +13,8 @@ AI Meeting Notes
     │   ├── user
     │   ├── ai_text
     │   └── ai_audio
-    └── frontend
+    └── front
+        └──pages
     ```
 * DB
    * Folder

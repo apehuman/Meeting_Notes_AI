@@ -8,3 +8,4 @@ def base():
         st.page_link("index.py", label="Sound Scanner", icon="🏠")
     with col2:
         st.page_link("pages/folders.py", label="Folders", icon="📁")
+    st.divider()

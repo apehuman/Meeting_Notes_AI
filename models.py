@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Table
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
@@ -11,7 +11,7 @@ class Folder(Base):
     __tablename__ = "folders"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
+    name = Column(String, unique=True, nullable=False)
     date_added = Column(DateTime, nullable=False, default=datetime.now())
 
     notes = relationship("Note", backref="folder", cascade='all, delete')  # 1:M relationship; cascade delete
@@ -24,5 +24,6 @@ class Note(Base):
     topic = Column(String, nullable=False)
     content = Column(Text, nullable=False)
     date_added = Column(DateTime, nullable=False, default=datetime.now())
+    date_edited = Column(DateTime, nullable=True)
     folder_id = Column(Integer, ForeignKey("folders.id"))
     # TODO: attendee = 

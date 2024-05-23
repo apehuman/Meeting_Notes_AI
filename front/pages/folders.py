@@ -1,18 +1,20 @@
 import streamlit as st
 import requests
 
+import api
 import template
 
 
 template.base()
 
-folders_url = "http://127.0.0.1:8000/folder/list"
-folders = requests.get(folders_url)
-
 st.write("Folders")
 
+st.page_link("pages/new_folder_form.py", label="Add a new Folder", icon="➕")
+
+folders = api.get_folders()
+
 if folders: 
-    for folder in folders.json():
+    for folder in folders:
         if st.button(folder['name']):
             st.session_state.folder_id = folder['id']
             st.switch_page("pages/folder.py")
