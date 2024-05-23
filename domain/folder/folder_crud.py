@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 
 from domain.folder.folder_schema import FolderCreate
-from domain.note import note_curd
+from domain.note import note_crud
 from models import Folder
 
 
@@ -15,7 +15,7 @@ def get_folders(db: Session):
 
 def get_folder(db: Session, id: int):
     folder = db.query(Folder).get(id)
-    notes = note_curd.get_notes(db, id)
+    notes = note_crud.get_notes(db, id)
     folder.notes = notes
     return folder
 

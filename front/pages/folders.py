@@ -1,15 +1,17 @@
 import streamlit as st
 import requests
 
+import api
 import template
 
 
 template.base()
 
-folders_url = "http://127.0.0.1:8000/folder/list"
-folders = requests.get(folders_url).json()
-
 st.write("Folders")
+
+st.page_link("pages/new_folder_form.py", label="Add a new Folder", icon="➕")
+
+folders = api.get_folders()
 
 if folders: 
     for folder in folders:
@@ -19,5 +21,3 @@ if folders:
         # st.write(st.session_state)
 else:
     st.write("No folders have been added yet")
-
-st.page_link("pages/new_folder_form.py", label="Add a new Folder", icon="➕")
