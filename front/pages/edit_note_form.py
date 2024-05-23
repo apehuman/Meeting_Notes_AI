@@ -28,7 +28,7 @@ else:
 
     if submit:
         if (topic == note['topic'] and content == note['content']):
-            st.error("You didn't edited any words!")
+            st.error("You didn't edit any words!")
         else: 
             response = api.update_note(note['id'], topic, content)
             if (response.status_code == 204):
