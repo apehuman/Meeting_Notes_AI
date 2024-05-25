@@ -7,3 +7,5 @@ migrations/versions/
 README
 *.mako
 *.db
+
+.streamlit/
