@@ -1,8 +1,8 @@
 import streamlit as st
 import requests
 
-summarize_url = "http://127.0.0.1:8000/summarize"
-summarize_meeting_url = "http://127.0.0.1:8000/summarize-meeting"
+summarize_url = "http://127.0.0.1:8000/ai-text/summarize"
+summarize_meeting_url = "http://127.0.0.1:8000/ai-text/summarize-meeting"
 
 
 def summarize(text, url):
