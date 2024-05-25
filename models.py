@@ -5,6 +5,15 @@ from datetime import datetime
 from database import Base
 
 
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True)
+    username = Column(String, unique=True, nullable=False)
+    password = Column(String, nullable=True)
+
+    folders = relationship("Folder", backref="user", cascade='all, delete')
+
 # Create your models here
 class Folder(Base):
     """A folder contains meeting notes"""
@@ -13,8 +22,10 @@ class Folder(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True, nullable=False)
     date_added = Column(DateTime, nullable=False, default=datetime.now())
+    owner = Column(Integer, ForeignKey("users.id"), nullable=True)
 
     notes = relationship("Note", backref="folder", cascade='all, delete')  # 1:M relationship; cascade delete
+
 
 class Note(Base):
     """Meeting Notes"""
