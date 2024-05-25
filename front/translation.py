@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-translate_url = "http://127.0.0.1:8000/translate"
+translate_url = "http://127.0.0.1:8000/ai-text/translate"
 
 
 def translate(text, src_lang, trg_lang):

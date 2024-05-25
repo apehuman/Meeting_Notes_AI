@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-chat_url = "http://127.0.0.1:8000/chat"
+chat_url = "http://127.0.0.1:8000/ai-text/chat"
 
 st.title("ChatGPT-like clone")
 
