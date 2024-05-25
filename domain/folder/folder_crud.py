@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import NoResultFound
 
 from domain.folder.folder_schema import FolderCreate
 from domain.note import note_crud
@@ -21,12 +21,14 @@ def get_folder(db: Session, id: int):
 
 
 def create_folder(db: Session, user: User, folder_create: FolderCreate):
-    db_folder = Folder(name=folder_create.name, owner=user.id)
     try: 
-        db.add(db_folder)
-        db.flush()
-    except IntegrityError:
+        db.query(Folder)\
+            .filter(Folder.owner == user.id)\
+            .filter(Folder.name == folder_create.name).one()
+    except NoResultFound:
         db.rollback()
-        raise Exception("Duplicate folder name")
-    else:
+        db_folder = Folder(name=folder_create.name, owner=user.id)
+        db.add(db_folder)
         db.commit()
+    else:
+        raise Exception("Duplicate Folder name")

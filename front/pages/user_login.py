@@ -20,7 +20,11 @@ if not st.session_state.auth:
             if username == st.secrets.user.username and password == st.secrets.user.password:
                 st.success("You're Logged in!")
                 st.session_state.auth = True
+
                 st.session_state.username = username
+                response = api.get_user_info(username)
+                st.session_state.user_id = response['id']
+
                 st.switch_page("index.py")
             else:
                 st.error("Your username & password didn't match. Please try again.")

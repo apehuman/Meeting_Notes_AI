@@ -1,5 +1,4 @@
 import streamlit as st
-import requests
 
 import api
 import template
@@ -11,7 +10,9 @@ st.write("Folders")
 
 st.page_link("pages/new_folder_form.py", label="Add a new Folder", icon="➕")
 
-folders = api.get_folders()
+# folders = api.get_folders()
+user = api.get_user_info(st.session_state.username)
+folders = user['folders']
 
 if folders: 
     for folder in folders:

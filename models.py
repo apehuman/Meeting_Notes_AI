@@ -20,7 +20,7 @@ class Folder(Base):
     __tablename__ = "folders"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String, unique=True, nullable=False)
+    name = Column(String, nullable=False)
     date_added = Column(DateTime, nullable=False, default=datetime.now())
     owner = Column(Integer, ForeignKey("users.id"), nullable=True)
 
