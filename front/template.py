@@ -2,13 +2,15 @@ import streamlit as st
 
 def unauth_menu():
     st.sidebar.page_link("index.py", label="Sound Scanner", icon="🏠")
-    st.sidebar.page_link("pages/user_login.py", label="Log in")
+    st.sidebar.page_link("pages/user_register.py", label="Sign Up")
+    st.sidebar.page_link("pages/user_login.py", label="Log In")
 
     col1, col2, col3 = st.columns(3)
     with col1:
         st.page_link("index.py", label="Sound Scanner", icon="🏠")
     with col3:
-        st.page_link("pages/user_login.py", label="Log in")
+        st.page_link("pages/user_register.py", label="Sign Up")
+        st.page_link("pages/user_login.py", label="Log In")
 
 def auth_sidebar():
     st.sidebar.page_link("index.py", label="Sound Scanner", icon="🏠")
