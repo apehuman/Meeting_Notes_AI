@@ -1,4 +1,5 @@
 import streamlit as st
+import api
 
 def unauth_menu():
     st.sidebar.page_link("index.py", label="Sound Scanner", icon="🏠")
@@ -16,6 +17,19 @@ def auth_sidebar():
     st.sidebar.page_link("index.py", label="Sound Scanner", icon="🏠")
     st.sidebar.page_link("pages/folders.py", label="Folders", icon="📁")
     st.sidebar.page_link("pages/user_logout.py", label="Log out")
+
+    # 폴더 목록을 가져오는 API 호출
+    user = api.get_user_info(st.session_state.username)
+    folders = user['folders']
+
+    with st.sidebar:
+        if folders:
+            for index, folder in enumerate(folders):
+                if st.button(folder['name'], key=index):
+                    st.session_state.folder_id = folder['id']
+                    st.switch_page("pages/folder.py")
+        else:
+            st.write("No folders have been added yet")
 
 def base():
     """Parent Template"""
