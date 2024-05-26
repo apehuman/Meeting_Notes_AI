@@ -36,3 +36,8 @@ def update_note(note_id, topic, content):
 def get_user_info(username):
     user_url = f"http://127.0.0.1:8000/user/{username}"
     return requests.get(user_url).json()
+
+def create_user(username, pwd1, pwd2):
+    user_create_url = "http://127.0.0.1:8000/user/create"
+    return requests.post(user_create_url, json={'username': username, 
+                                                'password1': pwd1, 'password2': pwd2})
