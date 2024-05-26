@@ -8,7 +8,7 @@ template.base()
 # st.write(st.session_state)
 
 if 'folder_id' not in st.session_state:
-    st.session_state.folder_id = 0
+    st.switch_page("pages/folders.py")
 
 folder = api.get_folder(st.session_state.folder_id)
 
