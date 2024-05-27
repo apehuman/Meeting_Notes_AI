@@ -20,7 +20,9 @@ def get_note(db: Session, id: int):
 
 def create_note(db: Session, folder_id: Folder, note_create: NoteCreate):
     db_note = Note(folder_id=folder_id, 
-                   topic=note_create.topic, content=note_create.content)
+                   topic=note_create.topic, 
+                   content=note_create.content,
+                   date_added=datetime.now())
     db.add(db_note)
     db.commit()
 

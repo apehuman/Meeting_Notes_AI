@@ -21,7 +21,7 @@ class Folder(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    date_added = Column(DateTime, nullable=False, default=datetime.now())
+    date_added = Column(DateTime, nullable=False)
     owner = Column(Integer, ForeignKey("users.id"), nullable=True)
 
     notes = relationship("Note", backref="folder", cascade='all, delete')  # 1:M relationship; cascade delete
@@ -34,7 +34,7 @@ class Note(Base):
     id = Column(Integer, primary_key=True)
     topic = Column(String, nullable=False)
     content = Column(Text, nullable=False)
-    date_added = Column(DateTime, nullable=False, default=datetime.now())
+    date_added = Column(DateTime, nullable=False)
     date_edited = Column(DateTime, nullable=True)
     folder_id = Column(Integer, ForeignKey("folders.id"))
     # TODO: attendee = 

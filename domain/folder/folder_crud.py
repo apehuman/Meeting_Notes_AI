@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import NoResultFound
 
@@ -27,7 +28,9 @@ def create_folder(db: Session, user: User, folder_create: FolderCreate):
             .filter(Folder.name == folder_create.name).one()
     except NoResultFound:
         db.rollback()
-        db_folder = Folder(name=folder_create.name, owner=user.id)
+        db_folder = Folder(name=folder_create.name, 
+                           date_added=datetime.now(),
+                           owner=user.id)
         db.add(db_folder)
         db.commit()
     else:
