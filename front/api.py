@@ -41,3 +41,7 @@ def create_user(username, pwd1, pwd2):
     user_create_url = "http://127.0.0.1:8000/user/create"
     return requests.post(user_create_url, json={'username': username, 
                                                 'password1': pwd1, 'password2': pwd2})
+
+def user_login(username, pwd):
+    user_login_url = "http://127.0.0.1:8000/user/login"
+    return requests.post(user_login_url, json={'username': username, 'password': pwd})

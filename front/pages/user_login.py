@@ -17,7 +17,8 @@ if not st.session_state.auth:
         if not password:
             st.warning("You didn't fill out the password.")
         else:
-            if username == st.secrets.user.username and password == st.secrets.user.password:
+            response = api.user_login(username, password)
+            if response.status_code == 200:
                 st.success("You're Logged in!")
                 st.session_state.auth = True
 
@@ -26,7 +27,7 @@ if not st.session_state.auth:
                 st.session_state.user_id = response['id']
 
                 st.switch_page("index.py")
-            else:
+            elif(response.status_code == 404):
                 st.error("Your username & password didn't match. Please try again.")
 else:
     st.success("You've already logged in!")
