@@ -7,6 +7,10 @@ import template
 if 'username' not in st.session_state:
     st.switch_page("pages/user_login.py")
 
+else:
+    if 'folder_id' not in st.session_state:
+        st.session_state['folder_id'] = 1
+
 template.base()
 
 st.write("Folders")

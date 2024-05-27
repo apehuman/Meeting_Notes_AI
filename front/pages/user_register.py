@@ -9,8 +9,8 @@ template.base()
 form = st.form(key="Create User")
 form.markdown("**Sign Up**")
 username = form.text_input("Username: ")
-passwd1 = form.text_input("Password: ")
-passwd2 = form.text_input("Confirm Password: ")
+passwd1 = form.text_input("Password: ", type="password")
+passwd2 = form.text_input("Confirm Password: ", type="password")
 submit = form.form_submit_button("Sign Up")
 
 if submit:

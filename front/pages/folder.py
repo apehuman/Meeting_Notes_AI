@@ -7,8 +7,12 @@ template.base()
 
 # st.write(st.session_state)
 
-if 'folder_id' not in st.session_state:
-    st.switch_page("pages/folders.py")
+if 'username' not in st.session_state:
+    st.switch_page("pages/user_login.py")
+
+else:
+    if 'folder_id' not in st.session_state:
+        st.session_state['folder_id'] = 1
 
 folder = api.get_folder(st.session_state.folder_id)
 
@@ -16,7 +20,7 @@ folder = api.get_folder(st.session_state.folder_id)
 st.sidebar.title("Notes List")
 for note in folder['notes']:
     st.sidebar.write(note['topic'])
-    
+
 
 st.title(f":open_file_folder: Folder: {folder['name']}")
 
@@ -43,7 +47,8 @@ for note in notes:
     date_added = date_added.strftime("%Y-%m-%d %H:%M")
     time = f"({date_added})"
     if note['date_edited']:
-        date_edited = datetime.strptime(note['date_edited'], "%Y-%m-%dT%H:%M:%S.%f")
+        date_edited = datetime.strptime(
+            note['date_edited'], "%Y-%m-%dT%H:%M:%S.%f")
         date_edited = date_edited.strftime("%Y-%m-%d %H:%M")
         time += f" (last edited: {date_edited})"
 
@@ -54,7 +59,6 @@ for note in notes:
             <p>&emsp;&emsp;{note['content']}</p>
         </div>
         """, unsafe_allow_html=True)
-    
 
     if st.button("Edit this note", key=note['id']):
         st.session_state.note_id = note['id']
