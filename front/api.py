@@ -28,8 +28,19 @@ def create_note(folder_id, topic, content):
 
 
 def update_note(note_id, topic, content):
-    note_update_url = f"http://127.0.0.1:8000/note/update"
+    note_update_url = "http://127.0.0.1:8000/note/update"
     return requests.put(note_update_url, json={'id': note_id, 'topic': topic, 'content': content})
+
+# ----------- ----------- ----------- ----------- ----------- ----------- ----
+# AI
+
+def update_note_translation(note_id, translation):
+    url = "http://127.0.0.1:8000/note/update-ai-translation"
+    return requests.put(url, json={'id': note_id, 'translation': translation})
+
+def update_note_summary(note_id, summary):
+    url = "http://127.0.0.1:8000/note/update-ai-summary"
+    return requests.put(url, json={'id': note_id, 'summary': summary})
 
 ##############################################################################
 

@@ -38,3 +38,24 @@ def note_update(_note_update: note_schema.NoteUpdate,
     if not db_note:
         raise HTTPException(status_code=404, detail="That note doesn't exist.")
     note_crud.update_note(db, db_note, _note_update)
+
+#-----------------------------------------------------------------
+
+@router.put("/update-ai-translation", status_code=status.HTTP_204_NO_CONTENT)
+def note_update_ai(_note_update_ai: note_schema.NoteAI,
+                   db: Session = Depends(get_db)):
+    """Add a new AI contents in the note: translation"""
+    db_note = note_crud.get_note(db, _note_update_ai.id)
+    if not db_note:
+        raise HTTPException(status_code=404, detail="That note doesn't exist.")
+    note_crud.update_note_ai_translation(db, db_note, _note_update_ai)
+
+
+@router.put("/update-ai-summary", status_code=status.HTTP_204_NO_CONTENT)
+def note_update_ai(_note_update_ai: note_schema.NoteAI,
+                   db: Session = Depends(get_db)):
+    """Add a new AI contents in the note: summary"""
+    db_note = note_crud.get_note(db, _note_update_ai.id)
+    if not db_note:
+        raise HTTPException(status_code=404, detail="That note doesn't exist.")
+    note_crud.update_note_ai_summary(db, db_note, _note_update_ai)

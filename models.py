@@ -36,5 +36,7 @@ class Note(Base):
     content = Column(Text, nullable=False)
     date_added = Column(DateTime, nullable=False)
     date_edited = Column(DateTime, nullable=True)
+    translation = Column(Text, nullable=True)
+    summary = Column(Text, nullable=True)
     folder_id = Column(Integer, ForeignKey("folders.id"))
     # TODO: attendee = 
