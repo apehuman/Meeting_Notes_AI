@@ -12,7 +12,18 @@ if 'folder_id' not in st.session_state:
 # st.write(st.session_state)
 folder = api.get_folder(st.session_state.folder_id)
 st.page_link("pages/folder.py", label=folder['name'], icon="📂")
+##########################
 
+def make_containers(meeting_summary):
+    """Make 3 sections of meeting summary"""
+    container1 = st.container(border=True)
+    container1.write(meeting_summary[0])
+    container2 = st.container(border=True)
+    container2.write(meeting_summary[1])
+    container3 = st.container(border=True)
+    container3.write(meeting_summary[2])
+
+##########
 
 if 'note_id' not in st.session_state:
     st.warning("You didn't choose any note!")
@@ -39,10 +50,20 @@ else:
                 st.error("There's no such note")
 
 
-
     with st.expander("**요약**"):
-        st.write("Hello")
+        if note['summary']:
+            st.markdown(note['summary'])
+            st.divider()
+        ai_text.summary_3lines(note['id'], note['content'])
 
+    with st.expander("**회의록 요약**"):
+        if note['meeting_summary']:
+            meeting_summary = note['meeting_summary']
+            meeting_summary = meeting_summary.split('\n\n')
+            make_containers(meeting_summary)
+            st.divider()
+        ai_text.summary_meeting(note['id'], note['content'])
+    
     with st.expander("**번역**"):
         if note['translation']:
             st.markdown(note['translation'])

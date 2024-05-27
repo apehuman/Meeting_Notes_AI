@@ -18,6 +18,8 @@ def summarize(text, model="gpt-3.5-turbo", meeting=False):
         -Overall summary of discussion
         -Action items (what needs to be done and who is doing it)
         -If applicable, a list of topics that need to be discussed more fully in the next meeting.
+
+        Don't forget to speak in Korean.
     """
     else:
         system_instruction = "Summarize content you are provided only into 3 lines of bulleted points"

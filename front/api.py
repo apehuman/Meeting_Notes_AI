@@ -42,6 +42,9 @@ def update_note_summary(note_id, summary):
     url = "http://127.0.0.1:8000/note/update-ai-summary"
     return requests.put(url, json={'id': note_id, 'summary': summary})
 
+def update_note_meeting_summary(note_id, summary):
+    url = "http://127.0.0.1:8000/note/update-ai-meeting"
+    return requests.put(url, json={'id': note_id, 'meeting_summary': summary})
 ##############################################################################
 
 def get_user_info(username):

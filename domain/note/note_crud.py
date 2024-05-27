@@ -45,3 +45,15 @@ def update_note_ai_summary(db: Session, db_note: Note, note_ai_created: NoteAI):
     db_note.summary = note_ai_created.summary
     db.add(db_note)
     db.commit()
+
+
+def update_note_ai_summary(db: Session, db_note: Note, note_ai_created: NoteAI):
+    db_note.summary = note_ai_created.summary
+    db.add(db_note)
+    db.commit()
+
+
+def update_note_ai_meeting_summary(db: Session, db_note: Note, note_ai_created: NoteAI):
+    db_note.meeting_summary = note_ai_created.meeting_summary
+    db.add(db_note)
+    db.commit()
