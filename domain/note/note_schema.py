@@ -11,6 +11,7 @@ class Note(BaseModel):
     date_edited: datetime.datetime | None = None
     translation: str | None = None
     summary: str | None = None
+    meeting_summary: str | None = None
 
 class NoteCreate(BaseModel):
     topic: str
@@ -31,3 +32,4 @@ class NoteAI(BaseModel):
     id: int
     translation: str | None = None
     summary: str | None = None
+    meeting_summary: str | None = None

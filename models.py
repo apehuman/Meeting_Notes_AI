@@ -38,5 +38,6 @@ class Note(Base):
     date_edited = Column(DateTime, nullable=True)
     translation = Column(Text, nullable=True)
     summary = Column(Text, nullable=True)
+    meeting_summary = Column(Text, nullable=True)
     folder_id = Column(Integer, ForeignKey("folders.id"))
     # TODO: attendee = 
