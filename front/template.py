@@ -25,7 +25,7 @@ def auth_sidebar():
     with st.sidebar:
         if folders:
             for index, folder in enumerate(folders):
-                if st.button(folder['name'], key=index):
+                if st.button(folder['name'], key=-index):
                     st.session_state.folder_id = folder['id']
                     st.switch_page("pages/folder.py")
         else:

@@ -26,6 +26,12 @@ class UserCreatePasswd(BaseModel):
             raise ValueError('비밀번호가 일치하지 않습니다')
         return v
 
+
 class UserCreateAPI(BaseModel):
     id: int
     username: str
+
+
+class UserLogin(BaseModel):
+    username: str
+    password: str
