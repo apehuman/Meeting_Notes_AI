@@ -18,16 +18,17 @@ with col1:
 with col2:
     st.image("img/headphone.png", width=150)
     st.markdown('<div style="margin: 28px;"></div>', unsafe_allow_html=True)
-    st.button("음성녹음 파일 변환")
-    
+    if st.button('음성녹음 파일 변환'):
+        st.switch_page("pages/Fileconvert.py")
+
 with col3:
     st.write("##")
 
 with col4:
     st.image("img/file.png", width=160)
     st.markdown('<div style="margin: 1px;"></div>', unsafe_allow_html=True)
-    st.button("실시간 음성 변환")
-
+    if st.button('실시간 음성 변환'):
+        st.switch_page("pages/Streamconvert.py")
 
 # 디스코드 플러그인 다운로드 섹션
 st.write("##")
