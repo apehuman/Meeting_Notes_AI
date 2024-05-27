@@ -16,6 +16,7 @@ def unauth_menu():
 def auth_sidebar():
     st.sidebar.page_link("index.py", label="Sound Scanner", icon="🏠")
     st.sidebar.page_link("pages/folders.py", label="Folders", icon="📁")
+    st.sidebar.page_link("pages/chatbot.py", label="ChatBot", icon="🤖")
     st.sidebar.page_link("pages/user_logout.py", label="Log out")
 
     # 폴더 목록을 가져오는 API 호출

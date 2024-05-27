@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from domain.note.note_schema import NoteCreate, NoteUpdate
+from domain.note.note_schema import NoteCreate, NoteUpdate, NoteAI
 from models import Folder, Note
 from sqlalchemy.orm import Session
 
@@ -31,5 +31,17 @@ def update_note(db: Session, db_note: Note, note_update: NoteUpdate):
     db_note.topic = note_update.topic
     db_note.content = note_update.content
     db_note.date_edited = datetime.now()
+    db.add(db_note)
+    db.commit()
+
+
+def update_note_ai_translation(db: Session, db_note: Note, note_ai_created: NoteAI):
+    db_note.translation = note_ai_created.translation
+    db.add(db_note)
+    db.commit()
+
+
+def update_note_ai_summary(db: Session, db_note: Note, note_ai_created: NoteAI):
+    db_note.summary = note_ai_created.summary
     db.add(db_note)
     db.commit()

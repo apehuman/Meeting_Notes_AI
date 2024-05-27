@@ -1,5 +1,6 @@
 import streamlit as st
 
+import ai_text
 import api
 import template
 
@@ -22,7 +23,7 @@ else:
     form = st.form(key="Edit Note")
     form.markdown("**Edit Note**")
     topic = form.text_input("topic", note['topic'])
-    content = form.text_area("content", note['content'])
+    content = form.text_area("content", note['content'], height=400)
     submit = form.form_submit_button("Save changes")
 
     if submit:
@@ -36,3 +37,14 @@ else:
                 st.warning("You should fill the form.")
             elif (response.status_code == 404):
                 st.error("There's no such note")
+
+
+
+    with st.expander("**요약**"):
+        st.write("Hello")
+
+    with st.expander("**번역**"):
+        if note['translation']:
+            st.markdown(note['translation'])
+            st.divider()
+        ai_text.translate(note['id'], note['content'])

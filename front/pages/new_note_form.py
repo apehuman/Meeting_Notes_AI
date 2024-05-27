@@ -1,5 +1,6 @@
 import streamlit as st
 
+import ai_text
 import api
 import template
 
@@ -45,7 +46,7 @@ form = st.form(key="Create Note")
 form.markdown("**새 노트 추가**")
 topic = form.text_input("노트 제목:", value=st.session_state.get('note_title', ''))
 content = form.text_area(
-    "노트 내용:", value=st.session_state.get('note_content', ''))
+    "노트 내용:", value=st.session_state.get('note_content', ''), height=350)
 submit = form.form_submit_button("노트 추가")
 
 if submit:
