@@ -12,15 +12,22 @@ def summarize(text, model="gpt-3.5-turbo", meeting=False):
     overall, action items, and next meeting topics
     """
     if meeting:
-        system_instruction = """
-        You will be provided with meeting notes, and your task is to summarize the meeting as follows:
+        # system_instruction = """
+        # You will be provided with meeting notes, and your task is to summarize the meeting as follows:
         
-        -Overall summary of discussion
-        -Action items (what needs to be done and who is doing it)
-        -If applicable, a list of topics that need to be discussed more fully in the next meeting.
+        # -Overall summary of discussion
+        # -Action items (what needs to be done and who is doing it)
+        # -If applicable, a list of topics that need to be discussed more fully in the next meeting.
 
-        Don't forget to speak in Korean.
-    """
+        # Don't forget to speak in Korean.
+        # """
+        system_instruction = """
+        너에게 회의록이 주어질 텐데, 너의 업무는 이 회의록을 다음과 같이 요약하는거야:
+
+        - 회의 전체 요약
+        - 액션 아이템 (무엇이 행해져야하고, 누가 하고 있는지)
+        - 다음 회의에 논의되어야 할 주제들
+        """
     else:
         system_instruction = "Summarize content you are provided only into 3 lines of bulleted points"
 
@@ -32,7 +39,7 @@ def summarize(text, model="gpt-3.5-turbo", meeting=False):
     response = openai.chat.completions.create(
         model=model,
         messages=messages,
-        temperature=0.7,
+        temperature=0.3,
         # max_tokens=64,
         top_p=1
     )
