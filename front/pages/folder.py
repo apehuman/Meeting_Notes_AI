@@ -53,10 +53,15 @@ for note in notes:
         time += f" (last edited: {date_edited})"
 
     # 노트 컨테이너에 노트 내용을 HTML과 CSS로 스타일링하여 표시
+    if len(note['content']) > 200:
+        content = f"{note['content'][:200]}..."
+    else:
+        content = note['content']
+
     st.markdown(f"""
         <div class="note-container">
             <h4>* {note['topic']} {time}</h4>
-            <p>&emsp;&emsp;{note['content']}</p>
+            <p>&emsp;&emsp;{content}</p>
         </div>
         """, unsafe_allow_html=True)
 
