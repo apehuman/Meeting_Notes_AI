@@ -54,6 +54,21 @@ st.markdown("""
 if 'conversion_result' not in st.session_state:
     st.session_state['conversion_result'] = "변환 결과가 여기에 표시됩니다."
 
+# 변환 형식을 위한 상태 변수 초기화
+if 'transcribe_mode' not in st.session_state:
+    st.session_state['transcribe_mode'] = 'transcription'
+
+# 모드 선택 라디오 버튼
+mode = st.radio("결과 형식 선택", ('일반 발화', '회의록'))
+
+# 모드 선택에 따라 상태 변수 업데이트
+if mode == '일반 발화':
+    st.session_state['transcribe_mode'] = 'transcription'
+    print(st.session_state['transcribe_mode'])
+elif mode == '회의록':
+    st.session_state['transcribe_mode'] = 'conversation'
+    print(st.session_state['transcribe_mode'])
+
 # 중앙에 파일 업로드 섹션을 배치
 uploaded_file = st.file_uploader("여기에 mp4, m4a, mp3, amr, flac, wav 파일을 드래그 앤 드롭하거나 업로드 버튼을 클릭하세요.", type=[
                                  'mp4', 'm4a', 'mp3', 'amr', 'flac', 'wav'])
@@ -68,7 +83,7 @@ if uploaded_file is not None:
     if st.button("변환", key="convert_button"):
         # 파일을 처리하여 변환 결과 얻기
         st.session_state['conversion_result'] = audio_process.audio_process(
-            uploaded_file)
+            uploaded_file, st.session_state['transcribe_mode'])
 else:
     st.write("WAV 파일을 업로드해주세요.")
 

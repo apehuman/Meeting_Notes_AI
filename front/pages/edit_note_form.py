@@ -12,7 +12,7 @@ if 'folder_id' not in st.session_state:
 # st.write(st.session_state)
 folder = api.get_folder(st.session_state.folder_id)
 st.page_link("pages/folder.py", label=folder['name'], icon="📂")
-##########################
+###############################################################################
 
 def make_containers(meeting_summary):
     """Make 3 sections of meeting summary"""
@@ -23,7 +23,18 @@ def make_containers(meeting_summary):
     container3 = st.container(border=True)
     container3.write(meeting_summary[2])
 
-##########
+###############################################################################
+# chat: 발화자 구분
+@st.experimental_fragment
+def speaker_recognition(content):
+    if content[0:3] != "발화자":
+        st.warning("발화자 구분 회의록 형식이 아닙니다.")
+    else: 
+        lines = content.splitlines()
+        for line in lines:
+            with st.chat_message(line[4]):
+                st.markdown(line[8:])
+###############################################################################
 
 if 'note_id' not in st.session_state:
     st.warning("You didn't choose any note!")
@@ -69,3 +80,7 @@ else:
             st.markdown(note['translation'])
             st.divider()
         ai_text.translate(note['id'], note['content'])
+    
+    with st.expander("**발화자 구분**"):
+        if st.button("발화자 구분", key="화자 구분"): 
+            speaker_recognition(note['content'])

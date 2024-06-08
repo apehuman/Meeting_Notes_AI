@@ -21,8 +21,26 @@ else:
 # Streamlit 앱의 제목
 st.title("녹음 변환기")
 
+
+# 변환 결과를 위한 상태 변수 초기화
 if 'conversion_result' not in st.session_state:
     st.session_state['conversion_result'] = "변환 결과가 여기에 표시됩니다."
+
+# 변환 형식을 위한 상태 변수 초기화
+if 'transcribe_mode' not in st.session_state:
+    st.session_state['transcribe_mode'] = 'transcription'
+
+# 모드 선택 라디오 버튼
+mode = st.radio("결과 형식 선택", ('일반 발화', '회의록'))
+
+# 모드 선택에 따라 상태 변수 업데이트
+if mode == '일반 발화':
+    st.session_state['transcribe_mode'] = 'transcription'
+    print(st.session_state['transcribe_mode'])
+elif mode == '회의록':
+    st.session_state['transcribe_mode'] = 'conversation'
+    print(st.session_state['transcribe_mode'])
+
 # 녹음중
 wav_audio_data = st_audiorec()
 
@@ -30,7 +48,7 @@ wav_audio_data = st_audiorec()
 if st.button("변환", key="convert_button"):
 
     st.session_state['conversion_result'] = audio_process.audio_process(
-        wav_audio_data)
+        wav_audio_data, st.session_state['transcribe_mode'])
 
 # 변환 결과를 텍스트 박스에 출력
 st.subheader("변환 결과")
